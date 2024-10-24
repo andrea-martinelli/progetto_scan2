@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "313211331327",
+    "project_id": "progettoscan-29793",
+    "storage_bucket": "progettoscan-29793.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313211331327:android:410e389f7764691f0fe2ca",
+        "android_client_info": {
+          "package_name": "com.example.progetto_scan2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKHyrKEGon9N4OamlP2NW0zXxTG6VIYh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
