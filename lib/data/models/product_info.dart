@@ -3,10 +3,12 @@ class ProductInfo {
   final String ref;
   final int stockReel; // Quantità, può essere negativa
   
+  
   ProductInfo({
     required this.id,
      required this.ref,
     required this.stockReel,
+   
    });
 
   // Metodo per aggiornare i campi con copyWith

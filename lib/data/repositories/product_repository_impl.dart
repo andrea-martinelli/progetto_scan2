@@ -1,5 +1,7 @@
+import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
 import 'package:progetto_scan2/data/datasources/api_client.dart';
 import 'package:progetto_scan2/data/models/product_info.dart';
+import 'package:progetto_scan2/data/models/product_info_update.dart';
 import '../../domain/repositories/product_repository.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
@@ -15,8 +17,11 @@ class ProductRepositoryImpl implements ProductRepository {
     return ProductInfo.fromJson(productData); // Crea un'istanza di ProductInfo
   }
   @override
-  Future<void> updateProductQuantityOnServer(int id, String ref, int stockReel) async {
+  Future<ProductInfoUpdate> updateProductQuantityOnServer(String barcode, int qty) async {
     // Chiama il metodo di ApiClient per aggiornare la quantità del prodotto
-    await apiClient.updateProductQuantityOnServer(id, ref, stockReel );
+    await apiClient.updateProductQuantityOnServer(barcode,qty);
+    return ProductInfoUpdate(barcode: barcode, qty: qty);
   }
+
+  
 }

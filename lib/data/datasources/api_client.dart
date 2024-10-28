@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:progetto_scan2/data/models/product_info_update.dart';
 
 class ApiClient {
   final Dio dio;
@@ -32,33 +34,29 @@ class ApiClient {
   }
 
   // Metodo per aggiornare la quantità del prodotto sul server
-  Future<void> updateProductQuantityOnServer(int id,  String ref, int stockReel)
-   async {
-    final url = 'http://10.11.11.104:6003/api/ProdottoBarcode/$stockReel'; // Usa il nuovo endpoint
+ Future<String> updateProductQuantityOnServer(String barcode, int qty) async {
+  final url = 'http://10.11.11.104:6003/api/ProductStock/adjust'; // Usa il nuovo endpoint
 
-    try {
-     // print('Inviando richiesta POST a: $url con quantità: $newQuantity e barcode: $barcodeId');
-      
-      // Invio la richiesta POST
-      final response = await dio.post(
-        url,
-     //   options: Options(headers: {'DOLAPIKEY': DOLAPIKEY}), // Aggiungi la chiave API nell'header
-        data: {
-          'id': id ,
-          'ref': ref,
-          'stockReel': stockReel,
-         
-        },
-      );
+  try {
+        print('Invio richiesta a $url con barcode: $barcode e qty: $qty');
+    final response = await dio.put(
+      url,
+      data: {
+        'barcode': barcode,
+        'qty': qty,
+      },
+    );
 
-      print('Risposta dal server: ${response.data}');
-      
-      if (response.statusCode != 200) {
-        throw Exception('Errore nell\'aggiornamento della quantità');
-      }
-    } catch (e) {
-      print('Errore nella richiesta API: $e');
-      throw Exception('Errore nella richiesta API: $e');
+    print('Risposta dal server: ${response.data}');
+
+    if (response.statusCode == 200) {
+      return 'Quantità aggiornata con successo'; // Ritorna un messaggio di successo
+    } else {
+      throw Exception('Errore nella risposta del server: ${response.statusCode}');
     }
+  } catch (e) {
+    print('Errore nella richiesta API: $e');
+    throw Exception('Errore nella richiesta API: $e');
   }
+}
 }
